@@ -1,5 +1,36 @@
-<Panel ux:Class="fidoer.ImageCanvas">
+<Panel ux:Name="Canvas" ux:Class="fidoer.ImageCanvas">
 	<Panel Aspect="1" BoxSizing="FillAspect" ClipToBounds="true">
+
+		<Each Items="{stickers.items}">
+			<Panel Physics.IsPhysicsWorld="true">
+				<Panel ux:Name="sticker">
+
+					<Image File="{src}">
+						<Scaling Factor="{scale}" />
+					</Image>
+
+					<WhileDragging>
+						<Change Target="Cross.Visibility" Value="Visible" />
+						<Change Target="Cross.Width" Duration="0.1" Value="30" Easing="QuadraticOut" />
+						<Change Target="Cross.Opacity" Duration="0.1" Value="0.6" Easing="QuadraticOut"/>
+						<Scale Factor=".95" Duration=".08"	 Easing="QuadraticOut" />
+					</WhileDragging>
+
+					<InForceFieldAnimation  ForceField="deleteAttract" From="0" To="1">
+			        	<Change Target="sticker.Opacity" Value="0"/>
+			        	<Scale Target="sticker" Factor="0"/>
+			        </InForceFieldAnimation>
+
+					<Draggable/>
+				</Panel>
+
+				<Panel ux:Name="Cross" Alignment="BottomCenter" Width="0" Margin="30" Opacity="0" Visibility="Collapsed" Anchor="50%,50%">
+					<Image File="../assets/cross.png" />
+					<PointAttractor ux:Name="deleteAttract" Radius="75" Strength="150" />
+				</Panel>
+			</Panel>
+		</Each>
+
 		<Image File="{imagePath}" StretchMode="UniformToFill">	 
 			<Match Value="{currentMode.type}">
 
@@ -21,7 +52,7 @@
 
 				<Case String="rotate">
 					<Rotation Degrees="{currentMode.degrees.val}" />
-					<Scaling Factor="{scale}" />
+					<Scaling Factor="{currentMode.scale}" />
 				</Case>
 
 			</Match>				

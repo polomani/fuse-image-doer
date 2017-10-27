@@ -1,0 +1,21 @@
+<Panel ux:Class="fidoer.StickersPanel" Margin="10" ux:Name="stickersPanel" Opacity="0" Alignment="VerticalCenter" Visibility="{stickers.panelVisibility}">
+
+	<WhileVisible>
+		<Change Target="stickersPanel.Opacity" Value="1" Duration=".4" Easing="QuadraticOut"/>
+	</WhileVisible>
+
+	<Rectangle Layer="Background" Color="#efefef" CornerRadius="4" Opacity="0.6"/>
+
+	<ScrollView>
+		<WrapPanel Alignment="HorizontalCenter">
+			<Each Items="{stickers.files}">
+				<Image ux:Name="img" Height="90" Margin="5,5,0,0" File="{}" Clicked="{stickers.addSticker}">
+					<WhilePressed>
+						<Scale Factor=".95" Duration=".08" Easing="QuadraticOut" />
+						<Change Target="img.Opacity" Value="0.5" Duration=".08" Easing="QuadraticOut"/>
+					</WhilePressed>
+				</Image>
+			</Each>
+		</WrapPanel>
+	</ScrollView>
+</Panel>

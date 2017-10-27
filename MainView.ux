@@ -1,17 +1,24 @@
 <App Background="#022328">
 
 	<JavaScript File="MainView.js"/>
+	
 
 	<WhileEmpty Items="{imagePath}">
-		<Button Text="Pick an image" Clicked="{pickImage}"/>
+		<fidoer.Button Height="40" Width="170" Text="Pick an image" Clicked="{pickImage}"/>
 	</WhileEmpty>
 	
 	<WhileNotEmpty Items="{imagePath}">
-		<StackPanel Margin="0,30">
 
-<!-- 		<StackPanel Dock="Top" Margin="10, 50">
-				<Button Text="Aa" Clicked="{addLabel}"/>
-			</StackPanel> -->
+		<Image ux:Name="button" Opacity="0.7" File="assets/sticker.png" Alignment="BottomRight" Margin="10" Width="50" Clicked="{stickers.togglePanel}">
+			<WhilePressed>
+				<Scale Factor=".95" Duration=".2" Easing="QuadraticOut" />
+				<Change Target="button.Opacity" Value="1" Duration=".2" Easing="QuadraticOut"/>
+			</WhilePressed>
+		</Image>
+
+		<fidoer.StickersPanel />
+
+		<StackPanel Margin="0,30">
 
 			<fidoer.EditModesPanel />
 

@@ -1,4 +1,7 @@
 {
+  "Mobile": {
+    "Orientations": "Portrait"
+  },
   "RootNamespace":"",
   "Packages": [
     "Fuse",
@@ -8,6 +11,8 @@
   "Includes": [
     "*",
     "assets/owl.jpg:Bundle",
+    "assets/stickers/*.png:Bundle",
+    "assets/*.png:Bundle",
     "src/*.uno:SourceFile",
     "modules/*.js:Bundle"
   ]

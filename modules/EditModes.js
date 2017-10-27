@@ -1,4 +1,6 @@
 var Observable = require("FuseJS/Observable");
+var currentMode = Observable();
+currentMode.value = {type:""};
 var imgWidth = 0;
 var imgHeight = 0;
 
@@ -20,7 +22,6 @@ var editModes = [
 function indexModes() {
 	for (var i = 0; i < editModes.length; ++i)
 		indexMode(editModes[i]);
-
 
 	function indexMode(mode) {
 		editModes[mode.type] = mode;	
@@ -51,12 +52,21 @@ function scaleToFill (degrees) {
     return scaleFactor;
 }
 
-editModes.initSizes = function(imageWidth, imageHeight) {
+function initSizes (imageWidth, imageHeight) {
 	imgWidth = imageWidth;
 	imgHeight = imageHeight;
 
 	//refresh
 	editModes.rotate.degrees.val.value = editModes.rotate.degrees.val.value;
-};
+}
 
-module.exports = editModes;
+function chooseMode (arg) {
+	currentMode.value = arg.data;
+}
+
+module.exports = {
+	items:editModes,
+	chooseMode: chooseMode,
+	initSizes: initSizes,
+	currentMode:currentMode
+};

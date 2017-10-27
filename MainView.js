@@ -1,14 +1,7 @@
 var Observable = require("FuseJS/Observable");
-var imagePath = Observable(); // Observable("assets/owl.jpg"); 
-var labels = Observable();
+var imagePath = Observable();
 var editModes = require("modules/EditModes");
-var currentMode = Observable();
-currentMode.value = {type:""}; //editModes.getAt(0);
-//editModes.initSizes(400, 270);
-
-function addLabel() {
-	labels.add({text:"text", x:0, y:0});
-}
+var stickers = require("modules/Stickers");
 
 function  pickImage()  {
 	var cameraRoll = require("FuseJS/CameraRoll");
@@ -18,22 +11,16 @@ function  pickImage()  {
 	        imagePath.value = image.path;
 	        editModes.initSizes(image.width, image.height);
 	    }, function(error) {
-	        // Will be called if the user aborted the selection or if an error occurred.
+	        console.log(JSON.stringify(error));
 	    });
 }
 
-function chooseMode(arg) {
-	currentMode.value = arg.data;
-}
-
 module.exports = {
-	labels:labels,
+	stickers: stickers,
 	imagePath:imagePath,
-	scale: editModes.rotate.scale,
 	editModes: editModes,
-	currentMode: currentMode,
+	currentMode: editModes.currentMode,
+	chooseMode: editModes.chooseMode,
 
-	pickImage: pickImage,
-	addLabel: addLabel,
-	chooseMode: chooseMode
+	pickImage: pickImage
 };

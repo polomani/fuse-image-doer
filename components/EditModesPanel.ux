@@ -1,6 +1,6 @@
 <ScrollView ux:Class="fidoer.EditModesPanel" AllowedScrollDirections="Horizontal">
 	<StackPanel Height="100" Orientation="Horizontal">
-		<Each Items="{editModes}">
+		<Each Items="{editModes.items}">
 			<Panel Clicked="{chooseMode}" Margin="5, 0">
 
 				<fidoer.WhiteLabel Value="{type}" TextAlignment="Center"/>
