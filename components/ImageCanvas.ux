@@ -1,0 +1,30 @@
+<Panel ux:Class="fidoer.ImageCanvas">
+	<Panel Aspect="1" BoxSizing="FillAspect" ClipToBounds="true">
+		<Image File="{imagePath}" StretchMode="UniformToFill">	 
+			<Match Value="{currentMode.type}">
+
+				<Case String="contrast">
+					<Effects.ContrastBrightness Contrast="{currentMode.contrast.val}" Brightness="{currentMode.brightness.val}"/>
+				</Case>
+
+				<Case String="blur">
+					<Blur Radius="{currentMode.radius.val}" />
+				</Case>
+
+				<Case String="desaturate">
+					<Desaturate Amount="{currentMode.amount.val}" />
+				</Case>
+
+				<Case String="halftone">
+					<Halftone DotTint="{currentMode.dottint.val}" PaperTint="0.5" Intensity="{currentMode.intensity.val}" Smoothness="2" Spacing="{currentMode.spacing.val}" />
+				</Case>
+
+				<Case String="rotate">
+					<Rotation Degrees="{currentMode.degrees.val}" />
+					<Scaling Factor="{scale}" />
+				</Case>
+
+			</Match>				
+		</Image>
+	</Panel>
+</Panel>

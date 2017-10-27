@@ -13,96 +13,11 @@
 				<Button Text="Aa" Clicked="{addLabel}"/>
 			</StackPanel> -->
 
-			<ScrollView AllowedScrollDirections="Horizontal">
-				<StackPanel Height="100" Orientation="Horizontal">
-					<Each Items="{editModes}">
-						<Panel Clicked="{chooseMode}" Margin="5, 0">
+			<fidoer.EditModesPanel />
 
-							<Text Value="{type}" TextAlignment="Center" TextColor="White"/>
-
-							<Panel Height="50" Width="100" ClipToBounds="true">
-
-								<Rectangle Opacity="0.6">
-									<Stroke Width="1" Color="White"/>
-								</Rectangle>
-
-								<Image StretchMode="UniformToFill" File="{imagePath}">
-
-									<WhileString Value="{type}" Equals="contrast">
-										<Effects.ContrastBrightness Contrast="{1.5}" Brightness="{0.5}"/>
-									</WhileString>
-
-									<WhileString Value="{type}" Equals="rotate">
-										<Rotation Degrees="-45" />
-									</WhileString>
-
-									<WhileString Value="{type}" Equals="blur">
-										<Blur Radius="5" />
-									</WhileString>
-
-									<WhileString Value="{type}" Equals="desaturate">
-										<Desaturate Amount="1" />
-									</WhileString>
-
-									<WhileString Value="{type}" Equals="halftone">
-										<Halftone DotTint="0" PaperTint="0.95" Intensity="1" Smoothness="2" Spacing="15" />
-									</WhileString>
-									
-								</Image>
-
-							</Panel>
-						</Panel>
-					</Each>
-				</StackPanel>
-			</ScrollView>
-
-			<Panel Margin="20, 0">
-				<Panel Aspect="1" BoxSizing="FillAspect" ClipToBounds="true">
-					<Image File="{imagePath}" StretchMode="UniformToFill">	 
-						<Match Value="{currentMode.type}">
-
-							<Case String="contrast">
-								<Effects.ContrastBrightness Contrast="{currentMode.contrast.val}" Brightness="{currentMode.brightness.val}"/>
-							</Case>
-
-							<Case String="blur">
-								<Blur Radius="{currentMode.radius.val}" />
-							</Case>
-
-							<Case String="desaturate">
-								<Desaturate Amount="{currentMode.amount.val}" />
-							</Case>
-
-							<Case String="halftone">
-								<Halftone DotTint="{currentMode.dottint.val}" PaperTint="0.5" Intensity="{currentMode.intensity.val}" Smoothness="2" Spacing="{currentMode.spacing.val}" />
-							</Case>
-
-							<Case String="rotate">
-								<Rotation Degrees="{currentMode.degrees.val}" />
-								<Scaling Factor="{scale}" />
-							</Case>
-
-						</Match>				
-					</Image>
-				</Panel>
-			</Panel>
-
-			<StackPanel Margin="15, 20">
-				<Each Items="{editModes}">
-					<WhileString Value="{type}" Equals="{currentMode.type}">
-
-						<Each Items="{props}">
-
-							<Text Color="White">{name}: {round(val*100)/100}</Text>
-
-						    <NativeViewHost>
-						        <Slider Value="{val}" Minimum="{min}" Maximum="{max}" />
-						    </NativeViewHost>
-
-						</Each>
-					</WhileString>
-				</Each>
-			</StackPanel>
+			<fidoer.ImageCanvas Margin="20, 0"/>
+			
+			<fidoer.SlidersPanel Margin="15, 20" />
 
 		</StackPanel>
 	</WhileNotEmpty>

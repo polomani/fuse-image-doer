@@ -1,0 +1,16 @@
+<StackPanel ux:Class="fidoer.SlidersPanel">
+	<Each Items="{editModes}">
+		<WhileString Value="{type}" Equals="{currentMode.type}">
+
+			<Each Items="{props}">
+
+				<fidoer.WhiteLabel>{name}: {round(val*100)/100}</fidoer.WhiteLabel>
+
+			    <NativeViewHost>
+			        <Slider Value="{val}" Minimum="{min}" Maximum="{max}" />
+			    </NativeViewHost>
+
+			</Each>
+		</WhileString>
+	</Each>
+</StackPanel>
